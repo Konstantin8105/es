@@ -404,9 +404,13 @@ C .                                                                   . SSP00379
 C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . SSP00380 
 C                                                                       SSP00381 
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)                               SSP00382 
-      DIMENSION A(5),MAXA(5)                                            SSP00383 
+      DIMENSION A(5),MAXA(4)                                            SSP00383 
       IF (NN.EQ.1) GO TO 900                                            SSP00384 
 C                                                                       SSP00385 
+      WRITE(*,*) "A"
+      WRITE(*,*) A
+      WRITE(*,*) "MAXA"
+      WRITE(*,*) MAXA
       DO 200 N=1,NN                                                     SSP00386 
       KN=MAXA(N)                                                        SSP00387 
       KL=KN + 1                                                         SSP00388 
@@ -430,35 +434,29 @@ C                                                                       SSP00385
   260 K=K + 1                                                           SSP00406 
   240 K=N                                                               SSP00407 
       B=0.                                                              SSP00408 
+      WRITE(*,*) " ---------- DO 300 ----------- "
+      WRITE(*,*) KL, KU, K
       DO 300 KK=KL,KU                                                   SSP00409 
       K=K - 1                                                           SSP00410 
       KI=MAXA(K)                                                        SSP00411 
-      WRITE(*,*) " ---------- CCd1 ----------- "
-      WRITE(*,*) K, KK, KI
-      WRITE(*,*) " ---------- CCd2 ----------- "
-      WRITE(*,*) MAXA
-      WRITE(*,*) " ---------- CCd3 ----------- "
-      WRITE(*,*) A(KK)
-      WRITE(*,*) " ---------- CCd4 ----------- "
-      WRITE(*,*) A(KI)
-      WRITE(*,*) " ---------- CCd4 KN ----------- "
-      WRITE(*,*) KN
       C=A(KK)/A(KI)                                                     SSP00412 
-      WRITE(*,*) " ---------- C ----------- "
-      WRITE(*,*) C
       IF (ABS(C).LT.1.E07) GO TO 290                                    SSP00413 
       WRITE (IOUT,2010) N,C                                             SSP00414 
+      WRITE(*,*) "A 2010"
+      WRITE(*,*) A
+      WRITE(*,*) "MAXA"
+      WRITE(*,*) MAXA
       GO TO 800                                                         SSP00415 
   290 B=B + C*A(KK)                                                     SSP00416 
   300 A(KK)=C                                                           SSP00417 
       A(KN)=A(KN) - B                                                   SSP00418 
-      WRITE(*,*) " ---------- <><> ----------- "
-      WRITE(*,*) A(KN),A(KK), B
   304 IF (A(KN)) 310,310,200                                            SSP00419 
   310 IF (ISH.EQ.0) GO TO 320                                           SSP00420 
       IF (A(KN).EQ.0.) A(KN)=-1.E-16                                    SSP00421 
       GO TO 200                                                         SSP00422 
   320 WRITE (IOUT,2000) N,A(KN)                                         SSP00423 
+      WRITE(*,*) "A 2000"
+      WRITE(*,*) A
       WRITE(*,*) "MAXA"
       WRITE(*,*) MAXA
       GO TO 800                                                         SSP00424 

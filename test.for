@@ -55,7 +55,7 @@
  
           DATA (A(I), I=1,NWK) / 2,-1, 4,-1, 2/
           DATA B               / 0.5,0, 1,0, 0.5 /
-          DATA MAXA            / 1,3,5,5/
+          DATA MAXA            / 1,3,5,6/
 C lamda1 = 2  (0.707 0.707 0.707)
 C lamda2 = 4  (-1    0     1    )
 
@@ -64,7 +64,7 @@ C    3          BUPC,NN,NNM,NWK,NWM,NROOT,RTOL,NC,NNC,NITEM,IFSS,
 C    4          IFPR,NSTIF,IOUT) 
 
           WRITE(*,*) "DECOMP"
-          CALL DECOMP (A,MAXA,NN,ISH,IOUT)
+          CALL DECOMP (A,MAXA,NN,0,IOUT)
           WRITE(*,*) "A"
           WRITE(*,*)  A
       END
